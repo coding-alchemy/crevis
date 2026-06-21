@@ -8,3 +8,6 @@ __pycache__/
 
 # Runtime artifacts
 bin/
+
+outputs/
+.venv/
