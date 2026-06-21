@@ -1,0 +1,12 @@
+# 方舟 API Key 配置（上层配置文件）
+# 将此文件放置在项目路径的上层（如 ~/.ark.yaml 或 ../.ark.yaml），避免将 API Key 提交到 Git 仓库。
+# 系统会自动查找，优先级：环境变量 > 上层配置 .ark.yaml > 项目内 conf/input.yaml
+
+# API Key
+api_key: "your_api_key_here"
+
+# 输入基础 URL（可选，用于自动将本地路径映射为公网 URL）
+# 配置后，程序会自动将 ../images/、../videos/ 等本地路径拼接为完整的 URL
+# 例如：本地文件 /Users/xxx/work/images/pic1.jpg
+# 对应 URL：https://your-bucket.cos.region.myqcloud.com/your-workdir/images/pic1.jpg
+base_input_url: "https://your-bucket.cos.region.myqcloud.com/your-workdir"

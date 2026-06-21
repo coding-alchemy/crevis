@@ -1,0 +1,80 @@
+# ==============================================================================
+# Seedance 2.0 视频生成配置
+# ==============================================================================
+# 本文件包含视频生成任务的所有可配置项，通过修改此文件即可调整生成参数
+# 无需修改代码。
+# 
+# 素材路径配置：
+#   - 支持单路径（字符串）或多路径（列表）
+#   - 支持相对路径（相对于上层目录）和 URL（以 http:// 或 https:// 开头）
+#   - 如果留空，则从默认路径自动获取所有文件
+# ==============================================================================
+
+# API 配置
+api:
+  # 项目路径上层路径的配置文件（如 ~/.ark.yaml 或 ../.ark.yaml）也可放置 API Key，避免将敏感信息提交到 Git。格式如下：
+  # api_key: "your_api_key_here"
+  # 优先级：环境变量 > 上层配置 .ark.yaml > 本文件
+  key: ""
+
+# 模型配置
+model:
+  # 模型 ID（或 Endpoint ID）
+  # 可选值：
+  #   - doubao-seedance-2-0-260128       (标准版)
+  #   - doubao-seedance-2-0-fast-260128  (快速版，默认)
+  id: "doubao-seedance-2-0-fast-260128"
+
+# 内容配置
+content:
+  # 文本提示词（描述视频编辑需求）
+  # 示例：将视频1礼盒中的香水替换成图片1中的面霜，运镜不变
+  prompt: "将视频1礼盒中的香水替换成图片1中的面霜，运镜不变"
+
+# 输入素材路径配置
+# 支持三种方式：
+#   1. URL（以 http:// 或 https:// 开头）— API 只支持这种格式
+#   2. 相对路径（相对于上层目录，如 "images/pic1.jpg"）— 仅本地预览，发送给 API 前需确保可访问
+#   3. 留空（自动从默认目录获取所有文件）— 仅本地预览，发送给 API 前需确保可访问
+# 
+# ⚠️ 注意：API 只接受 http:// 或 https:// 的 URL，不支持本地文件路径（file://）。
+#    如果使用本地文件，需要先将文件上传到可访问的 URL（如对象存储、CDN）。
+#    可以在上层目录（如 ../.ark.yaml 或 ~/.ark.yaml）配置 base_input_url，
+#    程序会自动将本地路径映射为对应的 URL。
+# 
+# 单路径示例：
+#   image_paths: "https://example.com/image.jpg"
+# 
+# 多路径示例（列表）：
+#   image_paths:
+#     - "https://example.com/image1.jpg"
+#     - "https://example.com/image2.jpg"
+inputs:
+  image_paths: ""       # 输入图片路径（支持单值或列表，必须是 URL）
+  video_paths: ""       # 输入视频路径（支持单值或列表，必须是 URL）
+  audio_paths: ""       # 输入音频路径（可选，支持单值或列表，必须是 URL）
+
+# 路径配置
+paths:
+  # 输入/输出目录，相对于上层目录（项目路径的父目录）
+  # 如果目录不存在，程序会自动创建 outputs 目录
+  image_dir: "images"   # 图片目录：默认 "images"
+  video_dir: "videos"   # 视频目录：默认 "videos"
+  audio_dir: "audios"   # 音频目录：默认 "audios"
+  output_dir: "outputs"  # 输出目录：生成结果保存位置，默认 "outputs"
+
+# 生成参数
+generation:
+  # 是否生成音频（true/false）
+  generate_audio: true
+
+  # 视频比例
+  # 可选值：16:9, 9:16, 1:1, 4:3, 3:4
+  ratio: "16:9"
+
+  # 视频时长（秒）
+  # 当前支持：5
+  duration: 5
+
+  # 是否添加水印（true/false）
+  watermark: true
